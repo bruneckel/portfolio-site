@@ -1,75 +1,24 @@
-# Nuxt Minimal Starter
+# brunoneckel.com
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Hello! This is my portfolio site [brunoneckel.com](https://brunoneckel.com). It is a wild work in progress (currently barely at an MVP stage) and also my safe place to experiment with new things I wanna try. Examine the code if you dare.
+Want to know how any particular thing was acheived? You should [write me](mailto:neckel.bw@gmail.com) because I love nerding out about this stuff and my gf and dog are honestly sick of hearing about it.
 
-## Setup
+# Dev
 
-Make sure to install dependencies:
+Its a "monorepo" (sorta?) with a frontend and backend dir. I like em together so I can easily facilitate typesafety and version changes that are tightly coupled.
 
-```bash
-# npm
-npm install
+## Frontend - Nuxt.js
 
-# pnpm
-pnpm install
+I'm currently using Nuxt.js for the frontend. The main reason was to explore the ecosystem and get hands-on experience with the framework, rather than purely optimizing for speed or familiarity.
 
-# yarn
-yarn install
+From a practical standpoint, I could have chosen Next.js instead, it would likely have been faster to build, given my previous experience with it. However, this project also serves as a learning opportunity, so I intentionally stepped a bit outside my comfort zone.
 
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+For the current MVP, the app is relatively simple and leans heavily on static generation. Because of that, other alternatives (like Astro) could also be a good fit. Still, Nuxt.js gives me enough flexibility to expand the project later if needed.The usual commands in the `frontend` dir:
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
+# Build, useful for checking if you have deploy-blocking issues
 npm run build
 
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+# Work on the site
+npm run dev
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
