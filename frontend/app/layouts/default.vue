@@ -8,6 +8,6 @@
 
 <style lang="postcss">
 body {
-  @apply min-h-screen bg-light dark:bg-dark dark:text-light;
+  @apply min-h-screen bg-light text-dark dark:bg-dark dark:text-light;
 }
 </style>
