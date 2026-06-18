@@ -30,6 +30,10 @@ export default defineNuxtConfig({
     "~": fileURLToPath(new URL("./", import.meta.url)),
   },
 
+  colorMode: {
+    preference: "light",
+  },
+
   tailwindcss: {
     exposeConfig: true,
     config: {
