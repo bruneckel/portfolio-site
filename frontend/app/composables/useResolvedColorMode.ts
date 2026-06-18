@@ -1,12 +1,8 @@
 export const useResolvedColorMode = () => {
   const colorMode = useColorMode();
 
-  const mode = computed<"light" | "dark">(() => {
-    return colorMode.value === "dark" ? "dark" : "light";
-  });
-
-  const isDark = computed(() => mode.value === "dark");
-  const isLight = computed(() => mode.value === "light");
+  const isDark = computed(() => colorMode.value === "dark");
+  const isLight = computed(() => colorMode.value === "light");
 
   const toggle = () => {
     colorMode.preference = isDark.value ? "light" : "dark";
@@ -17,7 +13,7 @@ export const useResolvedColorMode = () => {
   };
 
   return {
-    mode,
+    colorMode,
     isDark,
     isLight,
     toggle,

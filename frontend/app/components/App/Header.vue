@@ -1,16 +1,16 @@
-<script setup>
+<script setup lang="ts">
 import { motion } from "motion-v";
 
 import whiteIsotype from "@/assets/logos/white/isotype.svg";
 import blackIsotype from "@/assets/logos/black/isotype.svg";
 
-const { toggle, isDark } = useResolvedColorMode();
+const { toggle } = useResolvedColorMode();
 </script>
 
 <template>
   <header class="w-full mt-11 mb-[60px]">
     <motion.nav
-      class="w-auto px-3 py-2 flex justify-between items-center border border-black/10 dark:border-white/10 rounded-full"
+      class="flex items-center justify-between px-3 py-2 border border-black/10 dark:border-white/10 rounded-full"
       :initial="{ opacity: 0, scale: 0.5 }"
       :animate="{ opacity: 1, scale: 1 }"
       :transition="{
@@ -19,12 +19,21 @@ const { toggle, isDark } = useResolvedColorMode();
         ease: [0, 0.71, 0.2, 1.01],
       }"
     >
-      <NuxtImg
-        :src="!isDark ? blackIsotype : whiteIsotype"
-        alt="Logo"
-        width="30"
-        class="inline-block mr-2"
-      />
+      <div class="mr-2">
+        <NuxtImg
+          :src="blackIsotype"
+          alt="Logo"
+          width="30"
+          class="block dark:hidden"
+        />
+
+        <NuxtImg
+          :src="whiteIsotype"
+          alt="Logo"
+          width="30"
+          class="hidden dark:block"
+        />
+      </div>
 
       <AppTabs
         :tabs="[
@@ -36,15 +45,19 @@ const { toggle, isDark } = useResolvedColorMode();
 
       <button
         @click="toggle"
-        class="flex items-center justify-center size-[30px] ml-4 rounded-full bg-dark dark:bg-light"
+        class="ml-4 flex size-[30px] items-center justify-center rounded-full bg-dark dark:bg-light"
       >
         <Icon
+          name="ion:moon-sharp"
           size="14"
-          name="ion:sunny-sharp"
-          v-if="isDark"
-          class="text-dark"
+          class="block text-light dark:hidden"
         />
-        <Icon size="14" name="ion:moon-sharp" v-else class="text-light" />
+
+        <Icon
+          name="ion:sunny-sharp"
+          size="14"
+          class="hidden text-dark dark:block"
+        />
       </button>
     </motion.nav>
   </header>
