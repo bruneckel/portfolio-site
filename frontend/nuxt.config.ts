@@ -7,17 +7,19 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: ["@vue/devtools-core", "@vue/devtools-kit"],
+      include: ["@vue/devtools-core", "@vue/devtools-kit", "motion-v"],
     },
   },
 
   modules: [
-    "@nuxt/image",
     "@nuxtjs/color-mode",
+    "./modules/nuxt-theme-transition",
+    "@nuxt/image",
     "@nuxtjs/device",
     "@nuxtjs/i18n",
     "@nuxtjs/tailwindcss",
     "@nuxt/icon",
+    "@nuxt/eslint",
   ],
 
   icon: {
@@ -36,6 +38,11 @@ export default defineNuxtConfig({
     classSuffix: "",
   },
 
+  themeTransition: {
+    variant: "spread",
+    duration: "1s",
+  },
+
   tailwindcss: {
     exposeConfig: true,
     config: {
@@ -48,6 +55,16 @@ export default defineNuxtConfig({
             darkGray: "#696969",
           },
         },
+      },
+    },
+  },
+
+  eslint: {
+    config: {
+      stylistic: {
+        indent: "tab",
+        quotes: "single",
+        semi: true,
       },
     },
   },

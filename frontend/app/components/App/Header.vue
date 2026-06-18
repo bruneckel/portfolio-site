@@ -4,13 +4,13 @@ import { motion } from "motion-v";
 import whiteIsotype from "@/assets/logos/white/isotype.svg";
 import blackIsotype from "@/assets/logos/black/isotype.svg";
 
-const { toggle } = useResolvedColorMode();
+const { isAnimating, toggleTheme } = useThemeTransition();
 </script>
 
 <template>
-  <header class="w-full mt-11 mb-[60px]">
+  <header class="mt-11 mb-[60px] w-full">
     <motion.nav
-      class="flex items-center justify-between px-3 py-2 border border-black/10 dark:border-white/10 rounded-full"
+      class="flex items-center justify-between rounded-full border border-black/10 px-3 py-2 dark:border-white/10"
       :initial="{ opacity: 0, scale: 0.5 }"
       :animate="{ opacity: 1, scale: 1 }"
       :transition="{
@@ -44,8 +44,9 @@ const { toggle } = useResolvedColorMode();
       />
 
       <button
-        @click="toggle"
-        class="ml-4 flex size-[30px] items-center justify-center rounded-full bg-dark dark:bg-light"
+        :disabled="isAnimating"
+        class="ml-4 flex size-[30px] items-center justify-center rounded-full bg-dark dark:bg-light disabled:pointer-events-none"
+        @click="toggleTheme({ origin: originFromEvent($event) })"
       >
         <Icon
           name="ion:moon-sharp"

@@ -14,7 +14,6 @@ const selectedTab = ref(0);
 
 const onTabChange = async (index: number) => {
   selectedTab.value = index;
-  const tab = tabs[index];
 };
 </script>
 
@@ -36,10 +35,10 @@ const onTabChange = async (index: number) => {
         />
 
         <motion.button
-          @press-start="onTabChange(index)"
           :while-press="{ scale: 0.9 }"
           :while-focus="{ backgroundColor: 'var(--accent-transparent)' }"
           class="text-sm cursor-pointer bg-transparent px-3 py-1"
+          @press-start="onTabChange(index)"
         >
           {{ tab.name }}
         </motion.button>
@@ -47,5 +46,4 @@ const onTabChange = async (index: number) => {
     </ul>
   </nav>
 </template>
-
 <style scoped></style>
