@@ -1,75 +1,75 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import { fileURLToPath } from "node:url";
+import { fileURLToPath } from 'node:url';
 
 export default defineNuxtConfig({
-  compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
 
-  vite: {
-    optimizeDeps: {
-      include: ["@vue/devtools-core", "@vue/devtools-kit", "motion-v"],
-    },
-  },
+	modules: [
+		'@nuxtjs/color-mode',
+		'./modules/nuxt-theme-transition',
+		'@nuxt/image',
+		'@nuxtjs/device',
+		'@nuxtjs/i18n',
+		'@nuxtjs/tailwindcss',
+		'@nuxt/icon',
+		'@nuxt/eslint',
+	],
+	devtools: { enabled: true },
 
-  modules: [
-    "@nuxtjs/color-mode",
-    "./modules/nuxt-theme-transition",
-    "@nuxt/image",
-    "@nuxtjs/device",
-    "@nuxtjs/i18n",
-    "@nuxtjs/tailwindcss",
-    "@nuxt/icon",
-    "@nuxt/eslint",
-  ],
+	colorMode: {
+		preference: 'system',
+		fallback: 'light',
+		classSuffix: '',
+	},
 
-  icon: {
-    serverBundle: {
-      collections: ["ion"],
-    },
-  },
+	alias: {
+		'~': fileURLToPath(new URL('./', import.meta.url)),
+	},
+	compatibilityDate: '2025-07-15',
 
-  alias: {
-    "~": fileURLToPath(new URL("./", import.meta.url)),
-  },
+	vite: {
+		optimizeDeps: {
+			include: ['@vue/devtools-core', '@vue/devtools-kit', 'motion-v'],
+		},
+	},
 
-  colorMode: {
-    preference: "system",
-    fallback: "light",
-    classSuffix: "",
-  },
+	eslint: {
+		config: {
+			stylistic: {
+				indent: 'tab',
+				quotes: 'single',
+				semi: true,
+			},
+		},
+	},
 
-  themeTransition: {
-    variant: "spread",
-    duration: "1s",
-  },
+	i18n: {
+		defaultLocale: 'en',
+	},
 
-  tailwindcss: {
-    exposeConfig: true,
-    config: {
-      theme: {
-        extend: {
-          colors: {
-            dark: "#151516",
-            light: "#ffffff",
-            gray: "#f5f5f5",
-            darkGray: "#696969",
-          },
-        },
-      },
-    },
-  },
+	icon: {
+		serverBundle: {
+			collections: ['ion'],
+		},
+	},
 
-  eslint: {
-    config: {
-      stylistic: {
-        indent: "tab",
-        quotes: "single",
-        semi: true,
-      },
-    },
-  },
+	tailwindcss: {
+		exposeConfig: true,
+		config: {
+			theme: {
+				extend: {
+					colors: {
+						dark: '#151516',
+						light: '#ffffff',
+						gray: '#f5f5f5',
+						darkGray: '#696969',
+					},
+				},
+			},
+		},
+	},
 
-  i18n: {
-    defaultLocale: "en",
-  },
+	themeTransition: {
+		variant: 'spread',
+		duration: '1s',
+	},
 });

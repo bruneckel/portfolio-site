@@ -1,77 +1,79 @@
 import type {
-  EffectDefinition,
-  FadeEffectOptions,
-  SpreadEffectOptions,
-  ThemeOrigin,
-} from "../../types";
+	EffectDefinition,
+	FadeEffectOptions,
+	SpreadEffectOptions,
+	ThemeOrigin,
+} from '../../types';
 
 export const runThemeTransition = async (
-  definition: EffectDefinition,
-  origin: ThemeOrigin | null,
-  effectOptions: SpreadEffectOptions | FadeEffectOptions,
-  callback: () => void | Promise<void>,
-  setAnimating: (value: boolean) => void,
+	definition: EffectDefinition,
+	origin: ThemeOrigin | null,
+	effectOptions: SpreadEffectOptions | FadeEffectOptions,
+	callback: () => void | Promise<void>,
+	setAnimating: (value: boolean) => void,
 ) => {
-  if (import.meta.server) {
-    await callback();
-    return;
-  }
+	if (import.meta.server) {
+		await callback();
+		return;
+	}
 
-  const root = document.documentElement;
-  root.dataset.themeEffect = definition.name;
+	const root = document.documentElement;
+	root.dataset.themeEffect = definition.name;
 
-  if (origin) {
-    root.style.setProperty("--theme-origin-x", `${origin.x}px`);
-    root.style.setProperty("--theme-origin-y", `${origin.y}px`);
-  }
+	if (origin) {
+		root.style.setProperty('--theme-origin-x', `${origin.x}px`);
+		root.style.setProperty('--theme-origin-y', `${origin.y}px`);
+	}
 
-  const cleanup = () => {
-    delete root.dataset.themeEffect;
-    root.style.removeProperty("--theme-origin-x");
-    root.style.removeProperty("--theme-origin-y");
-  };
+	const cleanup = () => {
+		delete root.dataset.themeEffect;
+		root.style.removeProperty('--theme-origin-x');
+		root.style.removeProperty('--theme-origin-y');
+	};
 
-  const prefersReducedMotion = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  ).matches;
+	const prefersReducedMotion = window.matchMedia(
+		'(prefers-reduced-motion: reduce)',
+	).matches;
 
-  if (!document.startViewTransition || prefersReducedMotion) {
-    setAnimating(true);
+	if (!document.startViewTransition || prefersReducedMotion) {
+		setAnimating(true);
 
-    try {
-      await callback();
-    } finally {
-      setAnimating(false);
-      cleanup();
-    }
+		try {
+			await callback();
+		}
+		finally {
+			setAnimating(false);
+			cleanup();
+		}
 
-    return;
-  }
+		return;
+	}
 
-  setAnimating(true);
+	setAnimating(true);
 
-  const transition = document.startViewTransition(async () => {
-    await callback();
-  });
+	const transition = document.startViewTransition(async () => {
+		await callback();
+	});
 
-  let skipTimer: ReturnType<typeof setTimeout> | undefined;
+	let skipTimer: ReturnType<typeof setTimeout> | undefined;
 
-  try {
-    await transition.ready;
+	try {
+		await transition.ready;
 
-    const skipAfterMs = definition.getSkipAfterMs(effectOptions, origin);
-    skipTimer = setTimeout(() => {
-      transition.skipTransition?.();
-      setAnimating(false);
-    }, skipAfterMs);
+		const skipAfterMs = definition.getSkipAfterMs(effectOptions, origin);
+		skipTimer = setTimeout(() => {
+			transition.skipTransition?.();
+			setAnimating(false);
+		}, skipAfterMs);
 
-    await transition.finished;
-  } finally {
-    if (skipTimer) {
-      clearTimeout(skipTimer);
-    }
+		await transition.finished;
+	}
+	finally {
+		if (skipTimer) {
+			clearTimeout(skipTimer);
+		}
 
-    setAnimating(false);
-    cleanup();
-  }
+		setAnimating(false);
+		cleanup();
+	}
 };

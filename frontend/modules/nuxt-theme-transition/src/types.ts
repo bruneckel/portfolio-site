@@ -1,76 +1,76 @@
-export type ThemeEffect = "spread" | "fade";
+export type ThemeEffect = 'spread' | 'fade';
 
 export type ThemeOrigin = {
-  x: number;
-  y: number;
+	x: number;
+	y: number;
 };
 
-export type ThemeMode = "light" | "dark" | "system";
+export type ThemeMode = 'light' | 'dark' | 'system';
 
 export interface ThemeTransitionOptions {
-  origin?: ThemeOrigin | null;
-  variant?: ThemeEffect;
+	origin?: ThemeOrigin | null;
+	variant?: ThemeEffect;
 }
 
 export interface SpreadEffectOptions {
-  duration: string;
-  easing: string;
-  radius: string;
+	duration: string;
+	easing: string;
+	radius: string;
 }
 
 export interface FadeEffectOptions {
-  duration: string;
-  easing: string;
+	duration: string;
+	easing: string;
 }
 
 export interface ThemeTransitionEffects {
-  spread: SpreadEffectOptions;
-  fade: FadeEffectOptions;
+	spread: SpreadEffectOptions;
+	fade: FadeEffectOptions;
 }
 
 export interface EffectDefinition {
-  name: ThemeEffect;
-  requiresOrigin: boolean;
-  buildCss: (options: SpreadEffectOptions | FadeEffectOptions) => string;
-  getSkipAfterMs: (
-    options: SpreadEffectOptions | FadeEffectOptions,
-    origin: ThemeOrigin | null,
-  ) => number;
+	name: ThemeEffect;
+	requiresOrigin: boolean;
+	buildCss: (options: SpreadEffectOptions | FadeEffectOptions) => string;
+	getSkipAfterMs: (
+		options: SpreadEffectOptions | FadeEffectOptions,
+		origin: ThemeOrigin | null,
+	) => number;
 }
 
 export type ThemeTransitionModuleOptions = {
-  variant?: ThemeEffect;
-  duration?: string;
-  easing?: string;
-  radius?: string;
+	variant?: ThemeEffect;
+	duration?: string;
+	easing?: string;
+	radius?: string;
 };
 
 type ThemeTransitionConfig = ThemeTransitionModuleOptions | false;
 
-declare module "@nuxt/schema" {
-  interface NuxtConfig {
-    themeTransition?: ThemeTransitionConfig;
-  }
+declare module '@nuxt/schema' {
+	interface NuxtConfig {
+		themeTransition?: ThemeTransitionConfig;
+	}
 
-  interface PublicRuntimeConfig {
-    themeTransition: {
-      variant: ThemeEffect;
-      effects: ThemeTransitionEffects;
-    };
-  }
+	interface PublicRuntimeConfig {
+		themeTransition: {
+			variant: ThemeEffect;
+			effects: ThemeTransitionEffects;
+		};
+	}
 }
 
-declare module "nuxt/schema" {
-  interface NuxtConfig {
-    themeTransition?: ThemeTransitionConfig;
-  }
+declare module 'nuxt/schema' {
+	interface NuxtConfig {
+		themeTransition?: ThemeTransitionConfig;
+	}
 
-  interface PublicRuntimeConfig {
-    themeTransition: {
-      variant: ThemeEffect;
-      effects: ThemeTransitionEffects;
-    };
-  }
+	interface PublicRuntimeConfig {
+		themeTransition: {
+			variant: ThemeEffect;
+			effects: ThemeTransitionEffects;
+		};
+	}
 }
 
 export {};
