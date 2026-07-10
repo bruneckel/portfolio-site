@@ -5,7 +5,7 @@ Want to know how any particular thing was acheived? You should [write me](mailto
 
 # Dev
 
-Its a "monorepo" (sorta?) with a frontend and backend dir. I like em together so I can easily facilitate typesafety and version changes that are tightly coupled.
+Its a "monorepo" (sorta?) with a frontend and backend dir (soon...). I like em together so I can easily facilitate typesafety and version changes that are tightly coupled.
 
 ## Frontend - Nuxt.js
 
